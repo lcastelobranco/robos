@@ -1,0 +1,6 @@
+ptax
+taxasreferenciais
+btc
+emprestimosreg
+bovespa
+composicaoibov

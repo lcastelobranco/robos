@@ -2,22 +2,12 @@
 # -*- coding: utf-8 -*-
 
 import requests
-import psycopg2
 from bs4 import BeautifulSoup
 import pandas as pd
 import datetime
 import sys
 import re
-
-
-def conection():
-    # engine = create_engine('postgresql+psycopg2://postgres:L30051992z@localhost:5432/dados')
-    conn = psycopg2.connect(host="localhost", database="dados", user="postgres", password="L30051992z")
-    return conn,conn.cursor()
-
-def contexto(cursor):
-    cursor.execute("Select data from bovespa order by data desc")
-    return map( lambda x : x[0].strftime("%Y-%m-%d"), cursor.fetchall())
+from helper import *
 
 def error():
     print 'deu erro na data'
@@ -44,8 +34,8 @@ def parser(file_object,data_arquivo,hash):
 
 
 
-conn ,cursor= conection()
-lista = contexto(cursor)
+conn ,cursor,engine= conection("dados")
+lista = contexto(cursor,"bovespa")
 
 
 

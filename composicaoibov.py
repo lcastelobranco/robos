@@ -2,21 +2,11 @@
 # -*- coding: utf-8 -*-
 
 import requests
-import psycopg2
 from bs4 import BeautifulSoup
 import datetime
 import sys
+from helper import *
 
-
-
-def conection():
-    #engine = create_engine('postgresql+psycopg2://postgres:L30051992z@localhost:5432/dados')
-    conn = psycopg2.connect(host="localhost", database="dados", user="postgres", password="L30051992z")
-    return conn,conn.cursor()
-
-def contexto(cursor):
-    cursor.execute("Select data from composicaoibov order by data desc")
-    return map( lambda x : x[0].strftime("%Y-%m-%d")  ,cursor.fetchall())
 
 def error():
     print 'deu erro, nao sei qual eh.'
@@ -31,8 +21,9 @@ def parser(data, linha):
 
 
 
-conn ,cursor= conection()
-lista = contexto(cursor)
+conn ,cursor,engine = conection("dados")
+lista = contexto(cursor,"composicaoibov")
+
 
 
 url = "http://bvmf.bmfbovespa.com.br/indices/ResumoCarteiraTeorica.aspx?Indice=IBOV&idioma=pt-br"

@@ -13,3 +13,9 @@ def conection(database):
 def contexto(cursor,tabela):
     cursor.execute("Select data from "+tabela+" order by data desc")
     return map( lambda x : x[0].strftime("%Y-%m-%d"), cursor.fetchall())
+
+
+
+def error(msg):
+    print msg
+    sys.exit(0)

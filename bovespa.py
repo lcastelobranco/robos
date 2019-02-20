@@ -5,13 +5,8 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 import datetime
-import sys
 import re
 from helper import *
-
-def error():
-    print 'deu erro na data'
-    sys.exit(1)
 
 
 def parser(file_object,data_arquivo,hash):
@@ -27,9 +22,9 @@ def parser(file_object,data_arquivo,hash):
                 cursor.execute(str_sql, (data_arquivo, str(i), 'V', vendas[tipos.index(i)],hash))
             conn.commit()
         else:
-            error()
+            error("algum erro no 'subheader' do arquivo")
     else:
-        error()
+        error('algum erro no header do arquivo')
 
 
 
@@ -68,4 +63,4 @@ try:
 
 
 except:
-    error()
+    error('algum erro do processo em geral')

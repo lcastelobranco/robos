@@ -4,13 +4,8 @@
 import requests
 from bs4 import BeautifulSoup
 import datetime
-import sys
 from helper import *
 
-
-def error():
-    print 'deu erro, nao sei qual eh.'
-    sys.exit(0)
 
 
 def parser(data, linha):
@@ -36,8 +31,6 @@ data = '20'+'-'.join(soup.find_all(id="ctl00_contentPlaceHolderConteudo_lblTitul
 
 
 try:
-    #if map(lambda x: x.text, soup.table.find_all('tr'))[0].strip() == u'Código AçãoTipoQtde. TeóricaPart. (%)' :
-    #    if map(lambda x: x.text, soup.table.find_all('tr'))[1].split()[0:4] == [u'Quantidade', u'Teórica', u'Total', u'Redutor'] :
     linhas = map(lambda x: x.text.replace('.','').replace(',','.'), soup.table.find_all('tr'))
     if data not in lista:
         for linha in linhas[2:]:
@@ -47,10 +40,7 @@ try:
             texto = checklist.read().replace('composicaoibov\n', '')
         with open(r"C:\Users\luiz\PycharmProjects\robos\checklist.txt", 'w') as checklist:
                 checklist.write(texto)
-    #    else:
-    #        error()
-    #else:
-    #    error()
+
 
 except:
-    error()
+    error('algum erro do processo em geral')

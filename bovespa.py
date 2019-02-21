@@ -4,9 +4,13 @@
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
-import datetime
 import re
 from helper import *
+
+
+
+connectTor()
+#newidentity()
 
 
 def parser(file_object,data_arquivo,hash):
@@ -53,14 +57,8 @@ try:
     data_arquivo = '-'.join(file_object.iloc[1,0][-11:-1].split('/')[::-1])
     if data_arquivo not in lista:
         parser(file_object,data_arquivo,hash)
-
-    if data_arquivo == (datetime.datetime.now() - datetime.timedelta(2)).strftime("%Y-%m-%d"):
-    #Tenho que melhorar essa funcao criando um dud(-2) ou duc(1)
-        with open(r"C:\Users\luiz\PycharmProjects\robos\checklist.txt", 'r') as checklist:
-            texto = checklist.read().replace('bovespa\n', '')
-        with open(r"C:\Users\luiz\PycharmProjects\robos\checklist.txt", 'w') as checklist:
-            checklist.write(texto)
-
+        with open(r"C:\Users\luiz\PycharmProjects\robos\checklist.txt", 'a') as checklist:
+            checklist.writelines('bovespa\n')
 
 except:
     error('algum erro do processo em geral')

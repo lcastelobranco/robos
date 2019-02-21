@@ -35,11 +35,15 @@ rodar("btc",delay_days=0,delay_hour = 20):
 rodar("emprestimosreg",delay_days=0,delay_hour = 20):
 
 a = open(r"C:\Users\luiz\PycharmProjects\robos\checklist.txt", 'r').readlines()
+
+o_que_deveria_ter_funcionado = {'btc\n', 'emprestimosreg\n', 'bovespa\n', 'composicaoibov\n'}
+nao_precisava_funcionar = {'ptax\n', 'taxasreferenciais\n'}
+
 if agora.hour >= 22:
-    if ('btc\n' not in a) or ('emprestimosreg\n' not in a)  or ('emprestimosreg\n' not in a)  or ('composicaoibov\n' not in a):
-        send_sms("Algo deu errado em pegar os dados hoje do merc financeiro.\nConsegui pegar esses:\n\n"+''.join(a))
+    if not(o_que_deveria_ter_funcionado.issubset(set(a))):
+        send_sms("Algo deu errado em pegar os dados hoje do merc financeiro.\nFaltou esses:\n\n"+''.join(o_que_deveria_ter_funcionado - a))
 
 if agora.hour >= 23:
     with open(r"C:\Users\luiz\PycharmProjects\robos\checklist.txt", 'w') as checklist:
-        checklist.write('ptax\ntaxasreferenciais\n')
+        checklist.write(''.join(nao_precisava_funcionar))
 

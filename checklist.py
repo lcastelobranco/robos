@@ -39,3 +39,7 @@ if agora.hour >= 22:
     if ('btc\n' not in a) or ('emprestimosreg\n' not in a)  or ('emprestimosreg\n' not in a)  or ('composicaoibov\n' not in a):
         send_sms("Algo deu errado em pegar os dados hoje do merc financeiro.\nConsegui pegar esses:\n\n"+''.join(a))
 
+if agora.hour >= 23:
+    with open(r"C:\Users\luiz\PycharmProjects\robos\checklist.txt", 'w') as checklist:
+        checklist.write('ptax\ntaxasreferenciais\n')
+

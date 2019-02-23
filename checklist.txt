@@ -1,5 +1,2 @@
 ptax
 taxasreferenciais
-btc
-emprestimosreg
-composicaoibov

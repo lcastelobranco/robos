@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
@@ -15,8 +12,8 @@ def parser(file_object,data_arquivo,hash):
     #pdb.set_trace()
     if list(file_object.iloc[2:, 0]) == aux:
         if file_object.iloc[0,1].strip().upper() == 'COMPRAS' and file_object.iloc[0,4].strip().upper() == 'VENDAS' and file_object.iloc[1,1].strip().upper() == 'R$ MIL' and file_object.iloc[1,3].strip().upper() == 'R$ MIL':
-            compras = list(pd.read_excel(r"C:\Users\luiz\Desktop\temporarios\participacao.xls",skiprows=4,usecols= range(1,5),dtype=str).iloc[0:7,0])
-            vendas =  list(pd.read_excel(r"C:\Users\luiz\Desktop\temporarios\participacao.xls",skiprows=4,usecols= range(1,5),dtype=str).iloc[0:7,2])
+            compras = list(pd.read_excel(r"temporarios\participacao.xls",skiprows=4,usecols= range(1,5),dtype=str).iloc[0:7,0])
+            vendas =  list(pd.read_excel(r"temporarios\participacao.xls",skiprows=4,usecols= range(1,5),dtype=str).iloc[0:7,2])
             tipos = [u'Inv Individuais', u'Clubes de Inv', u'Institucional', u'Inves. Estrangeiro', u'Emp. Priv/Publ.', u'Instit. Financeiras',u'Outros']
             for i in tipos:
                 str_sql = "INSERT INTO bovespa (data,tipo,compravenda,financeiro,hash) values (%s,%s,%s,%s,%s)"
@@ -32,7 +29,7 @@ def parser(file_object,data_arquivo,hash):
 
 
 
-conn ,cursor,engine= conection("dados")
+conn ,cursor,engine= conection("robos_b3")
 lista = contexto(cursor,"bovespa")
 #print(sorted(list(set(lista))))
 
@@ -46,9 +43,9 @@ hash = e.split('../')[-1]
 #hash = ''
 url =  'http://www.b3.com.br/'+hash
 r2 = requests.get(url, allow_redirects=True)
-open(r"C:\Users\luiz\Desktop\temporarios\participacao.xls", 'wb').write(r2.content)
+open(r"temporarios\participacao.xls", 'wb').write(r2.content)
 
-file_object = pd.read_excel(r"C:\Users\luiz\Desktop\temporarios\participacao.xls",skiprows=2)
+file_object = pd.read_excel(r"temporarios\participacao.xls",skiprows=2)
 try:
     #data_arquivo ='-'.join(file_object.columns[0][-11:-1].split('/')[::-1])
     #data_arquivo = file_object.columns[1]
@@ -59,7 +56,7 @@ try:
     
     if data_arquivo not in lista:
         parser(file_object,data_arquivo,hash)
-        with open(r"C:\Users\luiz\PycharmProjects\robos\checklist.txt", 'a') as checklist:
+        with open(r"checklist.txt", 'a') as checklist:
             checklist.writelines('bovespa\n')
 
 except:

@@ -16,7 +16,7 @@ def parser(data, linha):
     conn.commit()
 
 
-conn ,cursor,engine = conection("dados")
+conn ,cursor,engine = conection("robos_b3")
 lista = contexto(cursor,"composicaoibov")
 
 

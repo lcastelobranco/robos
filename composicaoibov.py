@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 from helper import *
 
 
-connectTor()
+#connectTor()
 #newidentity()
 
 
@@ -32,8 +32,8 @@ try:
         for linha in linhas[2:]:
             parser(data,linha)
 
-    with open(r"C:\Users\luiz\PycharmProjects\robos\checklist.txt", 'a') as checklist:
-        checklist.writelines('composicaoibov\n')
+        with open(r"C:\Users\luiz\PycharmProjects\robos\checklist.txt", 'a') as checklist:
+            checklist.writelines('composicaoibov\n')
 
 
 except:

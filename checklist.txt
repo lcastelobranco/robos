@@ -1,2 +1,6 @@
 ptax
 taxasreferenciais
+composicaoibov
+bmf
+emprestimosreg
+btc

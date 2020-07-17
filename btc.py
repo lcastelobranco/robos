@@ -27,7 +27,7 @@ try:
     a = requests.get('http://www.b3.com.br/pt_br/produtos-e-servicos/emprestimo-de-ativos/renda-variavel/posicoes-em-aberto/')
     data = re.findall(r'Dados de Fechamento do Pregão de (.*?)<',a.text)[0]
 
-    if data not in lista:
+    if '-'.join(data.split('/')[::-1]) not in lista:
         h = "http://www.b3.com.br/pt_br/produtos-e-servicos/emprestimo-de-ativos/renda-variavel/posicoes-em-aberto/renda-variavel-8AE490C9701B5B35017039842ACE1F91.htm?data="+data+"&f=0"
         r = requests.post(h,params={"data": data})
         soup = BeautifulSoup(r.content, 'html.parser')

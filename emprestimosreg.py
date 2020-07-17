@@ -13,9 +13,7 @@ lista = contexto(cursor,"emprestimosreg")
 try:
     a = requests.get('http://www.b3.com.br/pt_br/produtos-e-servicos/emprestimo-de-ativos/renda-variavel/s_empreg_ativos/')
     data = re.findall(r'Dados de Fechamento do Pregão de (.*?)<',a.text)[0]
-    
-
-    if data not in lista:
+    if '-'.join(data.split('/')[::-1]) not in lista:
         h = "http://www.b3.com.br/pt_br/produtos-e-servicos/emprestimo-de-ativos/renda-variavel/s_empreg_ativos/renda-variavel-8AA8D0CD701B61040170400B64840F04.htm?data="+data+"&f=0"
         r = requests.post(h,params={"data": data})
         soup = BeautifulSoup(r.content, 'html.parser')
@@ -35,4 +33,4 @@ try:
 
 except:
     #print(t,lista)
-    print('EmprestimosReg algum erro do processo em geral')
+    print('EmprestimosReg - algum erro do processo em geral')

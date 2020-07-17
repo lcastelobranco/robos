@@ -1,13 +1,7 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 import requests
 from bs4 import BeautifulSoup
 from helper import *
 
-
-#connectTor()
-#newidentity()
 
 
 def parser(data, linha):
@@ -27,14 +21,14 @@ data = '20'+'-'.join(soup.find_all(id="ctl00_contentPlaceHolderConteudo_lblTitul
 
 
 try:
-    linhas = map(lambda x: x.text.replace('.','').replace(',','.'), soup.table.find_all('tr'))
+    linhas = list(map(lambda x: x.text.replace('.','').replace(',','.'), soup.table.find_all('tr')))
     if data not in lista:
         for linha in linhas[2:]:
             parser(data,linha)
 
-        with open(r"C:\Users\luiz\PycharmProjects\robos\checklist.txt", 'a') as checklist:
+        with open(r"checklist.txt", 'a') as checklist:
             checklist.writelines('composicaoibov\n')
 
 
 except:
-    error('algum erro do processo em geral')
+    error('CompIBOV - algum erro do processo em geral')

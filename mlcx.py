@@ -5,16 +5,16 @@ from helper import *
 
 
 def parser(data, linha):
-    str_sql = "INSERT INTO composicaosmall (data,ticker,nome,tipo,quantidadeteorica,participacao) values (%s,%s,%s,%s,%s,%s)"
+    str_sql = "INSERT INTO mlcx (data,ticker,nome,tipo,quantidadeteorica,participacao) values (%s,%s,%s,%s,%s,%s)"
     cursor.execute(str_sql, tuple([data] + linha.split('\n\n')[1:-1]))
     conn.commit()
 
 
 conn ,cursor,engine = conection("robos_b3")
-lista = contexto(cursor,"composicaosmall")
+lista = contexto(cursor,"mlcx")
 
 
-url = "http://bvmf.bmfbovespa.com.br/indices/ResumoCarteiraTeorica.aspx?Indice=SMLL&idioma=pt-br"
+url = "http://bvmf.bmfbovespa.com.br/indices/ResumoCarteiraTeorica.aspx?Indice=MLCX&idioma=pt-br"
 html = requests.post(url)
 soup = BeautifulSoup(html.text,'html.parser')
 data = '20'+'-'.join(soup.find_all(id="ctl00_contentPlaceHolderConteudo_lblTitulo")[0].text.split()[-1].split('/')[::-1])
@@ -27,8 +27,8 @@ try:
             parser(data,linha)
 
         with open(r"checklist.txt", 'a') as checklist:
-            checklist.writelines('composicaosmall\n')
+            checklist.writelines('MLCX\n')
 
 
 except:
-    error('CompSMALL - algum erro do processo em geral')
+    error('MLCX - algum erro do processo em geral')

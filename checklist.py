@@ -26,7 +26,17 @@ def rodar(name,delay_days=0,delay_hour = 0):
             pass
 
 
-rodar("composicaoibov",delay_days=0,delay_hour = 1)
+rodar("ibov",delay_days=0,delay_hour = 1)
+rodar("small",delay_days=0,delay_hour = 1)
+rodar("util",delay_days=0,delay_hour = 1)
+rodar("mlcx",delay_days=0,delay_hour = 1)
+rodar("imob",delay_days=0,delay_hour = 1)
+rodar("ivbx",delay_days=0,delay_hour = 1)
+rodar("idiv",delay_days=0,delay_hour = 1)
+rodar("ifix",delay_days=0,delay_hour = 1)
+rodar("icon",delay_days=0,delay_hour = 1)
+rodar("ifnc",delay_days=0,delay_hour = 1)
+
 rodar("bovespa",delay_days=2,delay_hour = 12)
 rodar("bmf",delay_days=1,delay_hour = 1)
 rodar("btc",delay_days=1,delay_hour = 20)
@@ -37,10 +47,10 @@ a = open(r"checklist.txt", 'r').readlines()
 #'btc'\ atualiza toda manha inclusive sabado
 #'emprestimosreg'\ atualiza toda manha inclusive sabado
 #'bovespa'\ atualiza toda tarde de segunda a sexta
-#'composicaoibov' atualiza toda manha inclusive sabado
+#'composicaoibov' e outros indices atualizam toda manha inclusive sabado
 #'bmf' atualiza toda manha inclusive sabado
 
-o_que_deveria_ter_funcionado = {'btc\n', 'emprestimosreg\n', 'bovespa\n', 'composicaoibov\n', 'bmf\n'}
+o_que_deveria_ter_funcionado = {'btc\n', 'emprestimosreg\n', 'bovespa\n', 'bmf\n', 'ibov\n', 'small\n', 'util\n', 'mlcx\n', 'imob\n', 'ivbx\n', 'idiv\n', 'ifix\n', 'icon\n', 'ifnc\n'}
 nao_precisava_funcionar = {'ptax\n', 'taxasreferenciais\n'}
 
 if agora.hour == 22:

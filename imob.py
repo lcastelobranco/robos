@@ -26,8 +26,10 @@ try:
         for linha in linhas[2:]:
             parser(data,linha)
 
-        with open(r"checklist.txt", 'a') as checklist:
-            checklist.writelines('IMOB\n')
+        with open(r"checklist.txt", 'r+') as checklist:
+            content = checklist.read()
+            checklist.seek(0, 0)
+            checklist.writelines('IMOB\n' + content)
 
 
 except:

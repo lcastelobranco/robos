@@ -5,13 +5,13 @@ from helper import *
 
 
 def parser(data, linha):
-    str_sql = "INSERT INTO composicaoibov (data,ticker,nome,tipo,quantidadeteorica,participacao) values (%s,%s,%s,%s,%s,%s)"
+    str_sql = "INSERT INTO ibov (data,ticker,nome,tipo,quantidadeteorica,participacao) values (%s,%s,%s,%s,%s,%s)"
     cursor.execute(str_sql, tuple([data] + linha.split('\n\n')[1:-1]))
     conn.commit()
 
 
 conn ,cursor,engine = conection("robos_b3")
-lista = contexto(cursor,"composicaoibov")
+lista = contexto(cursor,"ibov")
 
 
 url = "http://bvmf.bmfbovespa.com.br/indices/ResumoCarteiraTeorica.aspx?Indice=IBOV&idioma=pt-br"
@@ -26,8 +26,10 @@ try:
         for linha in linhas[2:]:
             parser(data,linha)
 
-        with open(r"checklist.txt", 'a') as checklist:
-            checklist.writelines('IBOV\n')
+        with open(r"checklist.txt", 'r+') as checklist:
+            content = checklist.read()
+            checklist.seek(0, 0)
+            checklist.writelines('IBOV\n' + content)
 
 
 except:
